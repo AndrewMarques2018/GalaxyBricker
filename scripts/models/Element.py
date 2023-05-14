@@ -1,17 +1,15 @@
-from scripts.utils.Vector import Vector
 from scripts.utils.Dimension import Dimension
+from scripts.utils.Vector import Vector
 
 
 class Element:
-    speed_max = 0
-    speed_min = 0
+    position = Vector()
+    dimension = Dimension()
     speed = Vector()
     acceleration = Vector()
-
-    def __init__(self, position=Vector(0, 0), dimension=Dimension(0, 0), image=None):
-        self.position = position
-        self.dimension = dimension
-        self.image = image
+    speed_max = 0
+    speed_min = 0
+    image = None
 
     def __str__(self):
         return f"Element: [ " \
@@ -22,7 +20,13 @@ class Element:
                f"speed_max={self.speed_max} " \
                f"acceleration={self.acceleration} ]"
 
-    def update_locale(self):
+    def set_position(self, position: Vector):
+        self.position = position
+
+    def set_dimension(self, dimension: Vector):
+        self.dimension = dimension
+
+    def update_position(self):
         if self.acceleration != 0:
             self.speed += self.acceleration
 
