@@ -1,7 +1,7 @@
 from tkinter import *
 
 from configs import Resolutions
-from models.utils.Dimension import Dimension
+from scripts.utils.Dimension import Dimension
 
 
 class GameEngine:
@@ -16,7 +16,7 @@ class GameEngine:
         self.window.title(self.title)
 
         self.window.resizable(height=self.resizable, width=self.resizable)
-        self.window.geometry(self.geometry.getGeometry())
+        self.window.geometry(self.geometry.get_geometry())
 
         self.window.mainloop()
 
