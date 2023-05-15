@@ -10,7 +10,7 @@ ball.acceleration = Vector(1, 0)
 cont = 10
 while cont > 0:
     cont -= 1
-    ball.update_position()
+    ball.update()
 
-print(ball.position)
+print(ball)
 

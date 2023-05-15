@@ -8,5 +8,14 @@ class Vector:
         y = self.y + other.y
         return Vector(x, y)
 
+    def __sub__(self, other):
+        x = self.x - other.x
+        y = self.y - other.y
+        return Vector(x, y)
+
+    def multiplication(self, mul):
+        self.x *= mul
+        self.y *= mul
+
     def __str__(self):
-        return f"Vector: [ x={self.x} y={self.y} ]"
+        return f"Vector [ x={self.x}, y={self.y} ]"

@@ -1,29 +1,30 @@
 from tkinter import StringVar, Radiobutton, Tk
-
+import pygame
 from configs import configs
+from scripts.models.Element import Element
 from scripts.utils.Dimension import Dimension
 
 
 class Window:
-    def __init__(self, title: str, dimension: Dimension, resizable: bool):
-        self.window = Tk()
-        self.window.title(title)
-        self.window.resizable(height=resizable, width=resizable)
-        self.window.geometry(dimension.get_geometry())
-        self.window.mainloop()
+    def __init__(self, instance, title: str, dimension: Dimension):
+        self.title = title
+        self.dimension = dimension
 
-    def dimensionGeometry(self):
-        options = configs.RESOLUTIONS
+        self.display = instance.display
+        self.paint = self.display.set_mode((dimension.width, dimension.height))
+        pygame.display.set_caption("Galaxy Bricker")
+        self.elements = []
 
-        variable = StringVar(self.window)
-        variable.set(options[0])
+    def update(self):
+        self.paint.fill((0, 0, 0))
 
-        def show_selected_option():
-            print("Opção selecionada:", variable.get())
+        for element in self.elements:
+            if element.image is not None:
+                element.update()
+                self.paint.blit(element.image, (element.position.x, element.position.y))
 
-        Radiobutton(self.window, text=options[0], variable=variable, value=options[0],
-                    command=show_selected_option).pack()
-        Radiobutton(self.window, text=options[1], variable=variable, value=options[1],
-                    command=show_selected_option).pack()
-        Radiobutton(self.window, text=options[2], variable=variable, value=options[2],
-                    command=show_selected_option).pack()
+        self.display.flip()
+
+    def add_element(self, *elements):
+        for element in elements:
+            self.elements.append(element)
