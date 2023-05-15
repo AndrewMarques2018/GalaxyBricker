@@ -1,9 +1,10 @@
-from scripts import GameEngine
+from scripts.GameEngine import GameEngine
 from scripts.utils.Dimension import Dimension
 
 
 def init():
-    GameEngine.run()
+    gameEngine = GameEngine()
+    gameEngine.run()
 
 
 init()
